@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un jardín para ti 🌻</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --gold: #ffd84d;
+    --yellow: #ffed83;
+    --night: #080c20;
+    --green: #367b45;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: var(--night);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== CIELO ===== */
+
+.sky {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 100%,
+            #253c47 0%, #101a32 45%, #050817 100%);
+    z-index: -5;
+}
+
+.moon {
+    position: absolute;
+    top: 8%;
+    right: 13%;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background: #fff6c7;
+    box-shadow:
+        0 0 25px #fff4bb,
+        0 0 70px #ffe7a455,
+        0 0 120px #ffe7a422;
+    animation: moonGlow 5s infinite alternate;
+}
+
+@keyframes moonGlow {
+    from { box-shadow: 0 0 25px #fff4bb, 0 0 50px #ffe7a433; }
+    to { box-shadow: 0 0 40px #fff4bb, 0 0 100px #ffe7a466; }
+}
+
+/* ===== ESTRELLAS ===== */
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -3;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--duration) infinite ease-in-out;
+    animation-delay: var(--delay);
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: .15; transform: scale(.7); }
+    50% { opacity: 1; transform: scale(1.6); }
+}
+
+/* ===== CONTENIDO ===== */
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 55px 15px 20px;
+}
+
+.tag {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #ffe89b;
+    opacity: 0;
+    animation: fadeIn 2s 1s forwards;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(48px, 9vw, 95px);
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 12px 0;
+    color: #ffe58a;
+    text-shadow: 0 0 30px #ffd84d66;
+    opacity: 0;
+    animation: titleIn 2s 1.5s forwards;
+}
+
+.subtitle {
+    max-width: 550px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2;
+    color: #e3e6ed;
+    opacity: 0;
+    animation: fadeIn 2s 2.5s forwards;
+}
+
+@keyframes titleIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* ===== JARDÍN ===== */
+
+.garden {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 390px;
+    margin-top: 10px;
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    left: -20%;
+    width: 140%;
+    height: 95px;
+    background: linear-gradient(to bottom, #183b32, #091c1c);
+    border-radius: 50% 50% 0 0;
+    filter: blur(2px);
+}
+
+/* ===== FLORES ===== */
+
+.flower {
+    position: absolute;
+    bottom: 55px;
+    left: var(--x);
+    width: var(--size);
+    height: 300px;
+    transform-origin: bottom center;
+    animation: sway var(--sway) ease-in-out infinite alternate;
+    animation-delay: var(--delay);
+}
+
+@keyframes sway {
+    from { transform: rotate(-4deg); }
+    to { transform: rotate(5deg); }
+}
+
+.stem {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 7px;
+    height: 210px;
+    background: linear-gradient(to right, #22532e, #66a64d, #22532e);
+    border-radius: 10px;
+    transform: translateX(-50%);
+    transform-origin: bottom;
+}
+
+.leaf {
+    position: absolute;
+    width: 60px;
+    height: 25px;
+    background: linear-gradient(135deg, #7abf52, #225a35);
+    border-radius: 0 100% 0 100%;
+    transform-origin: 0 100%;
+    animation: leafMove 3s infinite alternate ease-in-out;
+}
+
+.leaf.left {
+    left: 0;
+    bottom: 80px;
+    transform: rotate(15deg);
+}
+
+.leaf.right {
+    right: -48px;
+    bottom: 130px;
+    transform: scaleX(-1) rotate(15deg);
+}
+
+@keyframes leafMove {
+    from { rotate: -5deg; }
+    to { rotate: 8deg; }
+}
+
+/* Cabeza */
+
+.head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translateX(-50%);
+    animation: flowerFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes flowerFloat {
+    from { translate: 0 0; }
+    to { translate: 0 -8px; }
+}
+
+.petal {
+    position: absolute;
+    width: 34px;
+    height: 53px;
+    left: 43px;
+    top: 7px;
+    border-radius: 50%;
+    transform-origin: 17px 53px;
+    background: linear-gradient(to top, #ffad16, #fff18b);
+    box-shadow: 0 0 9px #ffcf4670;
+}
+
+.center {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: 36px;
+    top: 36px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, #a46a24, #42200e 75%);
+    border: 3px solid #db9b32;
+    box-shadow: 0 0 15px #ffcb3a55;
+    z-index: 3;
+}
+
+.center::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background-image: radial-gradient(#f3be5c 1px, transparent 1.5px);
+    background-size: 7px 7px;
+}
+
+/* ===== PÉTALOS VOLADORES ===== */
+
+.falling-petals {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.falling {
+    position: absolute;
+    top: -30px;
+    width: 12px;
+    height: 19px;
+    background: linear-gradient(#fff19b, #ffbd35);
+    border-radius: 100% 0 100% 0;
+    opacity: .8;
+    animation: fall var(--fall-time) linear infinite;
+    animation-delay: var(--fall-delay);
+}
+
+@keyframes fall {
+    0% {
+        transform: translate(0, -10vh) rotate(0deg);
+    }
+    50% {
+        transform: translate(70px, 50vh) rotate(180deg);
+    }
+    100% {
+        transform: translate(-40px, 110vh) rotate(360deg);
+    }
+}
+
+/* ===== MARIPOSAS ===== */
+
+.butterfly {
+    position: absolute;
+    font-size: 25px;
+    animation: fly 12s linear infinite;
+    opacity: .7;
+}
+
+@keyframes fly {
+    0% { transform: translate(-10vw, 50px) rotate(0deg); }
+    25% { transform: translate(25vw, -40px) rotate(15deg); }
+    50% { transform: translate(50vw, 50px) rotate(-15deg); }
+    75% { transform: translate(75vw, -30px) rotate(15deg); }
+    100% { transform: translate(110vw, 40px) rotate(0deg); }
+}
+
+/* ===== CARTA ===== */
+
+.letter {
+    position: relative;
+    z-index: 5;
+    width: min(90%, 500px);
+    padding: 28px;
+    margin: 0 auto 45px;
+    background: #fff9e9;
+    color: #654b26;
+    border-radius: 4px;
+    box-shadow: 0 0 50px #ffdc5c15;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: letterIn 2s 4s forwards;
+}
+
+@keyframes letterIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.letter h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 37px;
+    font-weight: 400;
+    color: #b88727;
+    margin-bottom: 12px;
+}
+
+.letter p {
+    font-size: 13px;
+    line-height: 2;
+}
+
+.heart {
+    display: inline-block;
+    margin-top: 15px;
+    color: #e4a33d;
+    font-size: 25px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+}
+
+/* ===== BOTÓN ===== */
+
+button {
+    position: relative;
+    z-index: 8;
+    margin: 10px 0 35px;
+    padding: 13px 28px;
+    background: transparent;
+    border: 1px solid #f8d977;
+    color: #ffe89b;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+button:hover {
+    background: #ffda64;
+    color: #28200d;
+    box-shadow: 0 0 30px #ffda6466;
+    transform: translateY(-3px);
+}
+
+footer {
+    position: relative;
+    z-index: 3;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #a5a9b9;
+    padding: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+    .garden {
+        height: 320px;
+        transform: scale(.88);
+        transform-origin: top center;
+        margin-bottom: -25px;
+    }
+
+    .moon {
+        width: 55px;
+        height: 55px;
+        right: 8%;
+    }
+
+    .letter {
+        padding: 22px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sky">
+    <div class="moon"></div>
+</div>
+
+<div class="stars" id="stars"></div>
+<div class="falling-petals" id="petals"></div>
+
+<div class="container">
+
+    <div class="tag">✦ Un pequeño detalle para ti ✦</div>
+
+    <h1>Un jardín para ti</h1>
+
+    <p class="subtitle">
+        Si pudiera regalarte algo bonito,
+        llenaría el cielo de estrellas
+        y el mundo entero de flores amarillas.
+    </p>
+
+    <div class="garden" id="garden">
+        <div class="ground"></div>
+    </div>
+
+    <div class="letter">
+        <h2>Para alguien especial...</h2>
+
+        <p>
+            Que nunca te falten motivos para sonreír,
+            sueños por cumplir y personas que te recuerden
+            lo maravillosa que es tu existencia.
+            <br><br>
+            Hoy estas flores son para ti,
+            porque hay personas que hacen más bonito
+            cualquier lugar con tan solo existir.
+            <br><br>
+            Y tú eres una de ellas. 🌻
+        </p>
+
+        <span class="heart">♥</span>
+    </div>
+
+    <button onclick="surprise()">
+        ✨ Una pequeña sorpresa ✨
+    </button>
+
+    <footer>
+        HECHO CON CARIÑO, PARA TI 🌼
+    </footer>
+
+</div>
+
+<script>
+
+/* ===== GENERAR ESTRELLAS ===== */
+
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 130; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+
+    star.style.setProperty(
+        "--duration",
+        (2 + Math.random() * 4) + "s"
+    );
+
+    star.style.setProperty(
+        "--delay",
+        (Math.random() * 5) + "s"
+    );
+
+    stars.appendChild(star);
+}
+
+/* ===== CREAR FLORES ===== */
+
+const garden = document.getElementById("garden");
+
+const flowers = [
+    { x: "12%", size: "90px", sway: "4s", delay: "0s" },
+    { x: "29%", size: "115px", sway: "3.5s", delay: ".5s" },
+    { x: "50%", size: "140px", sway: "4.5s", delay: "1s" },
+    { x: "70%", size: "110px", sway: "3.8s", delay: ".3s" },
+    { x: "87%", size: "85px", sway: "4.2s", delay: ".8s" }
+];
+
+flowers.forEach((f, index) => {
+
+    const flower = document.createElement("div");
+    flower.className = "flower";
+
+    flower.style.setProperty("--x", f.x);
+    flower.style.setProperty("--size", f.size);
+    flower.style.setProperty("--sway", f.sway);
+    flower.style.setProperty("--delay", f.delay);
+
+    const stem = document.createElement("div");
+    stem.className = "stem";
+
+    const leaf1 = document.createElement("div");
+    leaf1.className = "leaf left";
+
+    const leaf2 = document.createElement("div");
+    leaf2.className = "leaf right";
+
+    const head = document.createElement("div");
+    head.className = "head";
+
+    // Pétalos alrededor del centro
+    for (let i = 0; i < 16; i++) {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+
+        petal.style.transform =
+            `rotate(${i * 22.5}deg)`;
+
+        head.appendChild(petal);
+    }
+
+    const center = document.createElement("div");
+    center.className = "center";
+
+    head.appendChild(center);
+
+    flower.appendChild(stem);
+    flower.appendChild(leaf1);
+    flower.appendChild(leaf2);
+    flower.appendChild(head);
+
+    // Ajustar tamaños y alturas
+    flower.style.height = (210 + index * 12) + "px";
+
+    head.style.width = f.size;
+    head.style.height = f.size;
+
+    const scale = parseInt(f.size) / 120;
+
+    head.querySelectorAll(".petal").forEach(p => {
+        p.style.transform += ` scale(${scale})`;
+    });
+
+    head.querySelector(".center").style.transform =
+        `scale(${scale})`;
+
+    head.querySelector(".center").style.left =
+        `calc(50% - ${24 * scale}px)`;
+
+    head.querySelector(".center").style.top =
+        `calc(50% - ${24 * scale}px)`;
+
+    garden.appendChild(flower);
+});
+
+/* ===== PÉTALOS FLOTANDO ===== */
+
+const petals = document.getElementById("petals");
+
+function createPetal() {
+    const p = document.createElement("div");
+
+    p.className = "falling";
+
+    p.style.left = Math.random() * 100 + "%";
+
+    p.style.setProperty(
+        "--fall-time",
+        (7 + Math.random() * 9) + "s"
+    );
+
+    p.style.setProperty(
+        "--fall-delay",
+        (Math.random() * 5) + "s"
+    );
+
+    p.style.opacity = .3 + Math.random() * .6;
+
+    p.style.transform = `scale(${.5 + Math.random()})`;
+
+    petals.appendChild(p);
+
+    setTimeout(() => p.remove(), 18000);
+}
+
+for (let i = 0; i < 25; i++) {
+    createPetal();
+}
+
+setInterval(createPetal, 700);
+
+/* ===== MARIPOSAS ===== */
+
+for (let i = 0; i < 3; i++) {
+    const butterfly = document.createElement("div");
+
+    butterfly.className = "butterfly";
+    butterfly.textContent = "🦋";
+
+    butterfly.style.top = (25 + Math.random() * 45) + "%";
+
+    butterfly.style.animationDelay = (i * 4) + "s";
+
+    document.body.appendChild(butterfly);
+}
+
+/* ===== SORPRESA ===== */
+
+function surprise() {
+
+    // Lluvia extra de pétalos
+    for (let i = 0; i < 45; i++) {
+        setTimeout(createPetal, i * 60);
+    }
+
+    // Mensaje especial
+    const message = document.createElement("div");
+
+    message.innerHTML = `
+        <div style="
+            position:fixed;
+            inset:0;
+            z-index:20;
+            background:#050817dd;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:25px;
+            text-align:center;
+            animation:fadeIn 1s forwards;
+        ">
+            <div style="
+                max-width:450px;
+                background:#fff9e9;
+                color:#765523;
+                padding:35px 25px;
+                border-radius:8px;
+                box-shadow:0 0 70px #ffdf6855;
+            ">
+                <div style="font-size:45px">🌻</div>
+
+                <h2 style="
+                    font-family:'Great Vibes',cursive;
+                    font-size:45px;
+                    font-weight:400;
+                    color:#c29431;
+                    margin:10px;
+                ">
+                    ¡Estas flores son para ti!
+                </h2>
+
+                <p style="font-size:13px;line-height:2">
+                    Que cada flor te recuerde
+                    que mereces días bonitos,
+                    sonrisas sinceras
+                    y muchísima felicidad.
+                    <br><br>
+                    Nunca dejes de brillar. 💛
+                </p>
+
+                <button onclick="this.parentElement.parentElement.parentElement.remove()"
+                    style="
+                        color:#9b752a;
+                        border-color:#c9a348;
+                        margin-top:20px;
+                    ">
+                    Cerrar con cariño ✨
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(message);
+}
+
+</script>
+
+</body>
+</html>

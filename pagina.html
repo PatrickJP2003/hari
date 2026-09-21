@@ -39,8 +39,8 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 4.5em;
-            color: #F5D7FF;
-            text-shadow: 0 0 15px #B04BFF, 0 0 25px #FF3B7A;
+            color: #F6D1D5;
+            text-shadow: 0 0 15px #E8A2A8, 0 0 25px #D97F88;
             z-index: 10;
             pointer-events: none;
             text-align: center;
@@ -55,22 +55,22 @@
 
         #entry-button {
             padding: 16px 34px;
-            border: 2px solid #B04BFF;
+            border: 2px solid #E8A2A8;
             border-radius: 999px;
-            background: linear-gradient(135deg, #A94CFF, #FF3B7A);
+            background: linear-gradient(135deg, #F2B9BF, #D97F88);
             color: #FFFFFF;
             font-family: 'Patrick Hand', cursive;
             font-size: 2em;
             font-weight: 700;
             cursor: pointer;
-            filter: drop-shadow(0 0 15px #B04BFF) drop-shadow(0 0 25px #FF3B7A);
+            filter: drop-shadow(0 0 15px #E8A2A8) drop-shadow(0 0 25px #D97F88);
             transition: all 0.3s ease;
             margin-bottom: 20px;
             animation: latido 1.5s infinite ease-in-out;
         }
 
         #entry-button:hover {
-            filter: drop-shadow(0 0 20px #D46CFF) drop-shadow(0 0 35px #B04BFF);
+            filter: drop-shadow(0 0 20px #F4C2C7) drop-shadow(0 0 35px #E8A2A8);
             transform: scale(1.05);
         }
         
@@ -81,18 +81,9 @@
 
         #entry-text {
             font-size: 1.8em;
-            color: #F5D7FF;
-            text-shadow: 0 0 10px #B04BFF;
+            color: #F6D1D5;
+            text-shadow: 0 0 10px #E8A2A8;
             text-align: center;
-        }
-
-        #entry-modal-image {
-            width: min(320px, 80vw);
-            border-radius: 16px;
-            margin-top: 18px;
-            border: 2px solid #B04BFF;
-            box-shadow: 0 0 18px rgba(176, 75, 255, 0.8);
-            object-fit: cover;
         }
 
         #love-card-overlay {
@@ -114,7 +105,7 @@
             background-size: cover;
             background-position: center;
             border-radius: 20px;
-            box-shadow: 0 0 30px #B04BFF, 0 0 50px #FF3B7A;
+            box-shadow: 0 0 30px #E8A2A8, 0 0 50px #D97F88;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -132,12 +123,21 @@
         }
 
         #love-card-text {
-            position: relative;
-            font-size: 3em;
-            color: #ffffff;
-            text-shadow: 0 0 8px black, 0 0 15px black;
-            z-index: 2;
-        }
+    position: relative;
+    font-size: 1.1em;
+    line-height: 1.5;
+    color: #ffffff;
+    text-shadow: 0 0 8px black, 0 0 15px black;
+    z-index: 2;
+
+    max-height: 85%;
+    overflow-y: auto;
+
+    white-space: pre-line;
+    word-wrap: break-word;
+
+    padding: 10px;
+}
 
         @media (max-width: 768px) {
             #main-title { font-size: 3.4em; top: 25px; }
@@ -150,12 +150,11 @@
     </style>
 </head>
 <body>
-    <h1 id="main-title">Tengo que decir que.. <br>Te amo</h1>
+    <h1 id="main-title">ERES MI UNIVERSO HARI!</h1>
 
     <div id="entry-modal">
         <button id="entry-button">Apreta aquí</button>
-        <div id="entry-text">Toca para entrar</div>
-        <img id="entry-modal-image" src="https://i.pinimg.com/736x/22/b9/90/22b990829596bf6cd6b4d4bc287e1294.jpg" alt="Imagen especial">
+        <div id="entry-text">✨HARI ERES EL AMOR QUE SIEMPRE LE PEDI A DIOS ✨ </div>
     </div>
 
     <div id="love-card-overlay" style="display: none;">
@@ -190,7 +189,6 @@
     import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
     import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
     import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
     // ===================================================================
     // =============== MÓDULO DE AJUSTES EDITABLE ========================
@@ -202,9 +200,9 @@
         
         accretionRing: {
             innerRadius: 18, outerRadius: 32, segments: 128,
-            centerColor: '#F5D7FF',
-            midColor: '#B04BFF',
-            edgeColor: '#FF3B7A',
+            centerColor: '#F6D1D5',
+            midColor: '#E8A2A8',
+            edgeColor: '#D97F88',
             emissiveIntensity: 0.6, // <--- Resplandor central más suave
         },
         particles: {
@@ -227,57 +225,71 @@
 
             backgroundStars: { count: 5000, radius: 500, size: 0.2 },
             
-            // === TEXTOS FLORES VIOLETA/ROJO ===
+            // === TEXTOS Y FLORES EN ROJO PÁLIDO ===
             texts: {
                 count: 50, width: 45, height: 20,
                 minRadius: null, maxRadius: 120,
                 content:[
-                    "Te amo ",
-                    "Mis estrellas son tuyas ",
-                    "Pura luz ✨",
-                    "Siempre brillas ",
-                    "Sonríe siempre ",
-                    "Mi estrella ",
-                    "Luz en mi vida ",
-                    "Eres muy especial en mi vida",
-                    "Eres tan especial ",
-                    "La galaxia se queda corta ",
-                    "Amo tu sonrisa ",
-                    "Alegras mis mañanas ",
-                    "Eres mi todo ",
+                    "Siempre contigo ",
+                    "Eres mi calma ",
+                    "Me haces feliz ",
+                    "Tu sonrisa brilla ",
+                    "Qué bonito coincidir ",
+                    "Mi lugar favorito ",
+                    "Contigo todo mejora ",
+                    "Tu luz me inspira ",
+                    "Eres increíble ",
+                    "Gracias por existir ",
+                    "Mi corazón te elige ",
+                    "Qué suerte tenerte ",
+                    "Eres mi paz ",
                 ],
                 colors:[
-                    { fill: '#B04BFF', shadow: '#FF3B7A' },
-                    { fill: '#F5D7FF', shadow: '#9F3BFF' },
-                    { fill: '#EAB6FF', shadow: '#B04BFF' }
+                    { fill: '#E8A2A8', shadow: '#D97F88' },
+                    { fill: '#F6D1D5', shadow: '#E8A2A8' },
+                    { fill: '#F2B9BF', shadow: '#D97F88' }
                 ]
             },
-            images: {
+            emojis: {
                 count: 60, size: 12,
                 minRadius: null, maxRadius: 120,
-                urls:[
-                    'assets/img1.png',
-                    'assets/img2.png',
-                    'assets/img3.png',
-                    'assets/img4.png',
-                    'assets/img5.png',
-                    'assets/img6.png',
-                    'https://images.weserv.nl/?url=i.pinimg.com/736x/d2/f8/4c/d2f84c18db78609a1061cb0f9e03ac1d.jpg',
-                    'https://images.weserv.nl/?url=i.pinimg.com/736x/fb/02/46/fb0246eb77908f38f38699e4456333ad.jpg',
-                    'https://images.weserv.nl/?url=i.pinimg.com/736x/3f/1f/1a/3f1f1ac6551d8a6019dc1ecd49a77a6e.jpg'
-                ] 
+                content:[
+                    '💖', '💘', '💞', '💕', '❤️', '💐', '🌸', '🌹', '🌺', '🌷'
+                ],
+                colors:[
+                    { fill: '#F6D1D5', shadow: '#D97F88' },
+                    { fill: '#F2B9BF', shadow: '#E8A2A8' },
+                    { fill: '#E8A2A8', shadow: '#D97F88' }
+                ]
             }
         },
 
-        loveCards: {
-            images:[ 'assets/card.png', 'assets/card.png', 'assets/card.png', 'assets/card.png' ], 
-            phrases:[
-                "Eres una persona llena de luz que ilumina la vida de quienes te rodean.⭐ ",
-                "Hoy quiero celebrar tu vida y desearte que tu mundo siempre esté lleno de colores hermosos. ",
-                "Que estos tonos violeta y rojo te recuerden lo valiosa que es tu compañía. ✨",
-                "Un pequeño detalle para agradecerte por hacer de mis días algo mucho más especial. "
-            ]
-        },
+       loveCards: {
+    images:[
+        'assets/card.png',
+        'assets/card.png',
+        'assets/card.png',
+        'assets/card.png'
+    ],
+
+    phrases:[
+        `✨Hari, tú eres la chica que siempre amaré
+
+Sé que ahora mismo quizá no soy nada importante... pero tú eres todo para mí y siempre lo serás
+
+Cada día que pasa mi corazón sigue luchando por ti, porque eres lo más valioso que tengo en mi vida No importa lo difícil que sea el camino, mi amor por ti jamás se rendirá
+
+Quiero que sepas que en mis pensamientos siempre estás tú, porque contigo aprendí lo que significa amar de verdad Y aunque a veces no encuentre las palabras perfectas o tengamos desacuerdos mi corazón siempre te elegirá a ti ✨
+
+✨En esta vida y si hay otras te volvería a buscar✨`,
+
+        `✨Hari, siempre serás la persona más importante para mí 💖`,
+
+        `✨Mi corazón seguirá luchando por ti porque eres mi universo 🌌✨`,
+
+        `✨En esta vida y en todas las demás te volvería a elegir 💘✨`
+    ]
+},
 
         shootingStars: {
             enabled: true,
@@ -286,7 +298,7 @@
         },
         lighting: {
             ambientLight: { color: '#ffffff', intensity: 0.1 },
-            pointLight: { color: '#B04BFF', intensity: 2.5, distance: 350 }
+            pointLight: { color: '#E8A2A8', intensity: 2.5, distance: 350 }
         },
         bloomEffect: { threshold: 0.68, strength: 0.7, radius: 0.5 },
         cameraControls: { minDistance: 30, maxDistance: 250 }
@@ -294,7 +306,6 @@
     // ===================================================================
 
     let scene, camera, renderer, controls, galaxyGroup, clock, sphereMaterial, composer;
-    let heartModel = null;
     let loveTexts = [], loveImages =[], shootingStars = [];
     let occupiedPositions =[];
     let raycaster, mouse;
@@ -365,26 +376,6 @@
         const goldenRing = new THREE.Mesh(ringGeometry, ringMaterial);
         goldenRing.rotation.x = Math.PI / 2;
         scene.add(goldenRing);
-
-        addCenterHeart();
-    }
-
-    function addCenterHeart() {
-        const loader = new GLTFLoader();
-        const textureLoader = new THREE.TextureLoader();
-
-        loader.load('https://assets.codepen.io/74321/heart.glb', (gltf) => {
-            heartModel = gltf.scene.children[0];
-            heartModel.scale.set(8.2, 8.2, 8.2);
-            heartModel.position.set(0, 26, 0);
-
-            heartModel.material = new THREE.MeshMatcapMaterial({
-                matcap: textureLoader.load('https://assets.codepen.io/74321/3.png'),
-                color: '#ff3366'
-            });
-
-            scene.add(heartModel);
-        });
     }
 
     function createCoreStars() {
@@ -399,7 +390,7 @@
             const y = (Math.random() - 0.5) * coreConfig.maxHeight * Math.pow(1 - (distance / coreConfig.radius), 1.5);
             positions.set([Math.cos(angle) * distance, y, Math.sin(angle) * distance], i * 3);
             
-            // Colores violeta/rojo
+            // Colores rojo pálido
             const hue = 0.82 + Math.random() * 0.12;
             const saturation = 0.8 + Math.random() * 0.2;
             const lightness = 0.6 + Math.random() * 0.4;
@@ -439,7 +430,7 @@
 
             positions.set([x, y, z], filled * 3);
 
-            // Colores violeta/rojo para el halo
+            // Colores rojo pálido para el halo
             const hue = 0.82 + Math.random() * 0.12;
             const saturation = 0.6 + Math.random() * 0.4;
             const lightness = 0.45 + Math.random() * 0.45;
@@ -465,8 +456,7 @@
 
     function createLoveElements() {
         const textConfig = CONFIG.particles.texts;
-        const imageConfig = CONFIG.particles.images;
-        const textureLoader = new THREE.TextureLoader();
+        const emojiConfig = CONFIG.particles.emojis;
 
         for (let i = 0; i < textConfig.count; i++) {
             const colorData = textConfig.colors[i % textConfig.colors.length];
@@ -477,25 +467,15 @@
             galaxyGroup.add(textMesh); loveTexts.push(textMesh);
         }
 
-        for (let i = 0; i < imageConfig.count; i++) {
-            const imageUrl = imageConfig.urls[i % imageConfig.urls.length];
-            textureLoader.load(imageUrl, (texture) => {
-                const aspect = texture.image.width / texture.image.height;
-                const w = aspect > 1 ? imageConfig.size : imageConfig.size * aspect;
-                const h = aspect > 1 ? imageConfig.size / aspect : imageConfig.size;
-                
-                const roundedTexture = createRoundedImageTexture(texture);
-                const material = new THREE.MeshBasicMaterial({
-                    map: roundedTexture,
-                    transparent: true,
-                    alphaTest: 0.1,
-                    color: 0xBBBBBB
-                });
+        for (let i = 0; i < emojiConfig.count; i++) {
+            const colorData = emojiConfig.colors[i % emojiConfig.colors.length];
+            const emoji = emojiConfig.content[i % emojiConfig.content.length];
+            const texture = createEmojiTexture(emoji, colorData);
+            const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, alphaTest: 0.1 });
 
-                const imageMesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), material);
-                setElementOrbitPosition(imageMesh, imageConfig.minRadius, imageConfig.maxRadius);
-                galaxyGroup.add(imageMesh); loveImages.push(imageMesh);
-            });
+            const emojiMesh = new THREE.Mesh(new THREE.PlaneGeometry(emojiConfig.size, emojiConfig.size), material);
+            setElementOrbitPosition(emojiMesh, emojiConfig.minRadius, emojiConfig.maxRadius);
+            galaxyGroup.add(emojiMesh); loveImages.push(emojiMesh);
         }
     }
 
@@ -575,25 +555,25 @@
         return new THREE.CanvasTexture(canvas);
     }
 
-    function createRoundedImageTexture(texture) {
-        const img = texture.image; const maxSize = 512;
-        const w = (img.width > img.height) ? maxSize : (img.width / img.height) * maxSize;
-        const h = (img.width > img.height) ? (img.height / img.width) * maxSize : maxSize;
-        const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+    function createEmojiTexture(emoji, colorData) {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
         const ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
-        
-        const r = Math.min(w, h) * 0.1;
-        ctx.clearRect(0, 0, w, h);
-        ctx.beginPath(); ctx.moveTo(r, 0); ctx.lineTo(w - r, 0); ctx.quadraticCurveTo(w, 0, w, r);
-        ctx.lineTo(w, h - r); ctx.quadraticCurveTo(w, h, w - r, h); ctx.lineTo(r, h);
-        ctx.quadraticCurveTo(0, h, 0, h - r); ctx.lineTo(0, r); ctx.quadraticCurveTo(0, 0, r, 0);
-        ctx.closePath(); ctx.clip();
-        ctx.drawImage(img, 0, 0, w, h);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = '320px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
+        ctx.shadowColor = colorData.shadow;
+        ctx.shadowBlur = 24;
+        ctx.fillStyle = colorData.fill;
+        ctx.fillText(emoji, canvas.width / 2, canvas.height / 2 + 16);
 
         const newTexture = new THREE.CanvasTexture(canvas);
-        newTexture.colorSpace = THREE.SRGBColorSpace; newTexture.generateMipmaps = false;
-        newTexture.minFilter = THREE.LinearFilter; newTexture.magFilter = THREE.LinearFilter;
+        newTexture.colorSpace = THREE.SRGBColorSpace;
+        newTexture.generateMipmaps = false;
+        newTexture.minFilter = THREE.LinearFilter;
+        newTexture.magFilter = THREE.LinearFilter;
         return newTexture;
     }
 
@@ -637,11 +617,6 @@
         galaxyGroup.rotation.y = elapsedTime * CONFIG.galaxy.rotationSpeed;
         if (sphereMaterial) sphereMaterial.uniforms.uTime.value = elapsedTime;
 
-        if (heartModel) {
-            heartModel.rotation.y += 0.012;
-            heartModel.rotation.x = Math.sin(elapsedTime * 1.2) * 0.08;
-        }
-        
         loveTexts.forEach(t => t.lookAt(camera.position));
         loveImages.forEach(i => i.lookAt(camera.position));
         
@@ -666,7 +641,7 @@
 
     document.getElementById('entry-button').addEventListener('click', () => {
         const music = document.getElementById('background-music');
-        music.src = 'https://github.com/Baque2005/Organizador/raw/refs/heads/master/Franco%20De%20Vita%20-%20Te%20Amo%20(Letra).mp3';
+        music.src = 'https://github.com/Baque2005/Organizador/raw/refs/heads/master/Harry%20Styles%20-%20Sign%20of%20the%20Times%20(Official%20Video).mp3';
         music.load();
 
         music.play().catch(e => {
